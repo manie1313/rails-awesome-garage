@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_15_083953) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_15_111642) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_15_083953) do
     t.bigint "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fuel"
     t.index ["owner_id"], name: "index_cars_on_owner_id"
   end
 
