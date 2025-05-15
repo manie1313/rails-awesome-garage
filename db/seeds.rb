@@ -13,15 +13,18 @@ require 'faker'
 puts 'Cleaning DB ... '
 Owner.destroy_all
 Car.destroy_all
-Favorite.destroy_all
+# Favorite.destroy_all
 Review.destroy_all
 
 puts 'Creating 3 car owners'
 
-3.times do
+3.times do |i|
   owner = Owner.create!(
-    nickname: Faker::Internet.unique.username
+    nickname: Faker::Internet.unique.username[1..10]
   )
+
+  puts "#{i +1}-#{owner.nickname}"
+
   car = Car.create!(
     brand: Faker::Vehicle.manufacturer,
     model: Faker::Vehicle.model,
@@ -30,13 +33,15 @@ puts 'Creating 3 car owners'
     owner: owner
   )
 
+    puts "#{car.brand}"
+
   # rand(1..3).times do
-  #   Review.create!(
-  #     rating: rand(0.0..5.0),
-  #     comment: Faker::Quote.famous_last_words,
-  #     car: car
-  #   )
-  # end
+    Review.create!(
+      rating: rand(0..5.0).round(1),
+      # comment: Faker::Quote.famous_last_words,
+      car: car
+    )
+    puts "#{review.rating}"
 end
 
 puts "#{Owner.count} owners"
