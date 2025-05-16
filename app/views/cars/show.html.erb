@@ -1,0 +1,69 @@
+<%# <h1>Cars#show</h1>
+<p>Find me in app/views/cars/show.html.erb</p> %>
+
+<h1><%= @car.brand %></h1>
+<h2><%= @car.model %></h2>
+<p><%= @car.fuel %></p>
+<p><%= @car.year %></p>
+
+<% if @car.favourites.empty? %>
+  <%= simple_form_for [@car, @favourite] do |f| %>
+    <%# <%= f.submit "Save in my garage", class: "btn btn-primary" %>
+    <button type="submit" class="btn btn-danger">
+      <%# class="btn btn-link text-danger" %>
+      <i class="fa-regular fa-heart"></i>
+    </button>
+
+  <% end %>
+  <%# <%= f.button :button, type: :submit do %>
+    <%# <i class="<%= @car.favourites == [] ? 'fa-regular' : 'fa-solid' %>
+    <%# fa-heart"></i> %>
+<% else %>
+  <p class="text-success">
+      <i class="fa-solid fa-heart-circle-check"></i>This car is already in your garage
+<% end %>
+
+<%# half star
+<<i class="fa-solid fa-star-half-stroke"></i> %>
+
+<%# empty star
+<i class="fa-regular fa-star"></i> %>
+
+<%= simple_form_for [@car, @review] do |f| %>
+  <%= f.input :comment %>
+  <%= f.input :rating, collection: (0..5).step(0.5).to_a %>
+  <%= f.submit %>
+<% end %>
+<hr>
+
+<div class="container">
+  <% @car.reviews.each do |review| %>
+    <div class="card">
+      <p>
+        <% stars_full = review.rating.floor %>
+        <% star_half = review.rating - stars_full >= 0.5 %>
+        <% stars_empty = 5 - stars_full - (star_half ? 1 : 0) %>
+
+        <% stars_full.times do%>
+          <i class="fa-solid fa-star"></i>
+        <% end %>
+
+        <% if star_half %>
+          <i class="fa-solid fa-star-half"></i>
+        <% end %>
+
+        <% stars_empty.times do %>
+          <i class="fa-regular fa-star"></i>
+         <% end %>
+          <%# <%= '⭐' * review.rating %>
+      </p>
+      <p><%= review.comment %></p>
+    </div>
+  <% end %>
+</div>
+
+<%# <div class="my-5">
+  <i class="fas fa-heart text-danger"></i> Font Awesome Test (Solid)
+  <i class="far fa-heart text-danger"></i> Font Awesome Test (Regular)
+  <i class="fab fa-font-awesome text-primary"></i> Font Awesome Test (Brand)
+</div> %>

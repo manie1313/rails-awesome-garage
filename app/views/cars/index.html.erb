@@ -1,0 +1,11 @@
+<%# <h1>Cars#index</h1>
+<p>Find me in app/views/cars/index.html.erb</p> %>
+<h1>Cars display</h1>
+
+<% @cars.each do |car| %>
+  <h2><%= car.brand %></h2>
+  <h4><%= car.model %></h4>
+  <p><%= car.created_at.strftime("%a %b %w  %Y at %l:%M %p") %></p>
+  <p><%= car.owner.nickname %></p>
+  <hr>
+<% end %>
